@@ -1,0 +1,1 @@
+# Classical-method-of-identifying-stellar-configurations-using-information-about-brightness
