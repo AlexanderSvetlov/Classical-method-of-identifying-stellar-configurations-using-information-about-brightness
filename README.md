@@ -41,9 +41,7 @@ As a result, a dataset (star catalog and sky images) is formed that enables comp
 
 Additionally, information about star coordinates on the images can be added to the catalog using the IRAF tool. These data can be used to study and compare centroiding methods, as well as to analyze the influence of centroid position errors on the algorithm’s performance.
 
-We also provide a ready-made dataset created by us based on the GAIA DR2 catalog and the DSS sky survey, available in ZIP format at
-https://disk.360.yandex.ru/d/o_NG6FBhhDggcw
-.
+We also provide a ready-made dataset created by us based on the GAIA DR2 catalog and the DSS sky survey, available in ZIP format at https://disk.360.yandex.ru/d/o_NG6FBhhDggcw.
 Detailed information about the dataset and the selected image parameters is included in a text file at the same link. Our catalog contains stars covering the full range of right ascension, with declinations limited to the range (−70 deg, 70 deg).
 
 ---
