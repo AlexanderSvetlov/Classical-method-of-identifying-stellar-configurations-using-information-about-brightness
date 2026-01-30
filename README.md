@@ -4,9 +4,13 @@ We present an open implementation of a classical geometric algorithm for the ini
 
 The notebooks use efficient tools for working with large datasets, including the Apache Parquet storage format, the Polars library for tabular data processing, and the KDTree data structure for fast spatial searches.
 
+If you use this code in your research, please cite: "paper link".
+
+If you have any questions, please contact us by email: svetlovae@my.msu.ru.
+
 ---
 
-## Описание программных компонентов репозитория
+## Description of the repository software components
 
 ### Algorithm.ipynb
 
