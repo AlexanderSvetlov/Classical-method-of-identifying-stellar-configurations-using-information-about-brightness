@@ -1,8 +1,8 @@
 # Classical-method-of-identifying-stellar-configurations-using-information-about-brightness
 
-Мы предлагаем открытую реализацию классического геометрического алгоритма начального отождествления звёздных конфигураций с использованием координатной и координатно-фотометрической информации. Репозиторий предназначен для тестирования классических методов астроориентации, их сравнения с альтернативными (в том числе нейросетевыми) подходами, а также для использования в качестве базового эталона при разработке новых алгоритмов.
+We present an open implementation of a classical geometric algorithm for the initial identification of stellar configurations using both coordinate-only and coordinate–photometric information. The repository is intended for testing classical star identification and attitude determination methods, comparing them with alternative approaches (including neural-network-based ones), and serving as a baseline reference for the development of new algorithms.
 
-В ноутбуах используются эффективные инструменты работы с большими данными: формат хранения Apache Parquet, библиотека Polars для табличных данных и структура KDTree для их быстрой обработки.
+The notebooks use efficient tools for working with large datasets, including the Apache Parquet storage format, the Polars library for tabular data processing, and the KDTree data structure for fast spatial searches.
 
 ---
 
@@ -10,46 +10,50 @@
 
 ### Algorithm.ipynb
 
-Основной ноутбук репозитория, реализующий процедуру начального отождествления звёздных конфигураций.
+The main notebook of the repository, implementing the procedure for the initial identification of stellar configurations.
 
-Реализованы два режима работы:
-- координатный (используются только угловые расстояния);
-- координатно-фотометрический (используются расстояния и блеск).
+Two operating modes are implemented:
+- coordinate-only (using angular distances only);
+- coordinate–photometric (using both angular distances and stellar brightness).
 
-Может быть использован как для реальных изображений, так и "виртуальных", для каждого из которых также добавлены методы верификации получаемых на выходе работы алогритма координат центра кадра.
+The notebook can be used with both real images and “virtual” images. For each case, verification methods are provided to validate the output results of the algorithm, including the determination of the image frame center coordinates.
 
-Ключевые параметры алгоритма:
-- допустимая ошибка сравнения угловых расстояний;
-- допустимое ошибка сравнения звёздных величин;
-- характеристики анализируемого изображения.
+Key algorithm parameters include:
+- allowable error in angular distance comparison;
+- allowable error in stellar magnitude comparison;
+- characteristics of the analyzed image.
 
 ---
 
 ### Dataset.ipynb
 
-Этот ноутбук используется для создания звёздного каталога, содержащего навигационные звёзды, которые используются алогритмом для отождествления звёздных конфигураций на кадре.
+This notebook is used to create a star catalog containing navigation stars that are employed by the algorithm for identifying stellar configurations in an image.
 
-Звёздный каталог содержит небесные координаты навигационных звёзд, их звёздные величины и уникальные идентификаторы Gaia. Каталог формируется на основе данных Gaia DR2 с ограничением по диапазону небесных координат и по максимальной звёздной величине. Предельный блеск может задаваться пользователем и подбирается в соответствии с характеристиками моделируемого ЗД.
+The star catalog includes celestial coordinates of navigation stars, their stellar magnitudes, and unique Gaia identifiers. The catalog is constructed using Gaia DR2 data with constraints on the range of celestial coordinates and on the maximum stellar magnitude. The limiting magnitude can be specified by the user and is selected according to the characteristics of the simulated star sensor.
 
-Помимо таблицы данных, в программе реализовано добавление изображений рассматриваемого участка небесной сферы. Выбор обзора неба, из которого добавляются изображения, можно изменять в программе.
-Для получения изображений необходимо задание их параметров, которые определяются харакетристиками фотоприёмника звёздного датчика:
-- радиус поля зрения;
-- количество пикселов в матрице приёмника изображения;
-- размер пиксела в градусах.
+In addition to the data table, the program implements the inclusion of images of the selected region of the celestial sphere. The sky survey used to add images can be changed within the program.
+To obtain images, it is necessary to specify their parameters, which are determined by the characteristics of the star sensor image detector:
+- field-of-view radius;
+- number of pixels in the detector matrix;
+- pixel size in degrees.
 
-Таким образом формируется датасет (звёздный каталог и изображения неба), который позволяет проводить всесторонние исследования реализаций методов астроориентации. При создании датасета формируется файл с информацией о его харакетристиках.
+As a result, a dataset (star catalog and sky images) is formed that enables comprehensive studies of star identification and attitude determination methods. During dataset creation, a file containing information about its characteristics is also generated.
 
-Также в каталог может быть добавлена информация о координатах звёзд на изображениях, получаемая с помощью инструмента IRAF. Эти данные могут быть использованы для исследования и сравнения методов поиска фотоцентров на изображениях, а также для изучения влияния ошибок определения координат фотоцентров на эффективность работы алогритма. 
+Additionally, information about star coordinates on the images can be added to the catalog using the IRAF tool. These data can be used to study and compare centroiding methods, as well as to analyze the influence of centroid position errors on the algorithm’s performance.
 
-Мы прикрепляем готовый датасет, созданный нами на основе данных каталога GAIA DR2 и обзора неба DSS, в формате ZIP по ссылке https://disk.360.yandex.ru/d/o_NG6FBhhDggcw. Подробная информация о нём и выбранных параметрах изображений содержатся в текстовом файле по той же ссылке. Наш каталог содержит звезды всего диапазона прямых восхождений, но имеющие склонения в диапазоне (−70 deg, 70 deg). 
+We also provide a ready-made dataset created by us based on the GAIA DR2 catalog and the DSS sky survey, available in ZIP format at
+https://disk.360.yandex.ru/d/o_NG6FBhhDggcw
+.
+Detailed information about the dataset and the selected image parameters is included in a text file at the same link. Our catalog contains stars covering the full range of right ascension, with declinations limited to the range (−70 deg, 70 deg).
 
 ---
 
 ### DistsCatalog.ipynb
 
-Данный ноутбук предназначен для формирования каталога расстояния базы данных звёздного датчика. Он позволяет сформировать таблицу с расстояними между навигационными звёздами из звёздного каталога. 
-Основными настраиваемыми параметрами являются: 
-- максимальное угловое расстояние между звёздами пары;
-- предельная звёздная величина каталога (соответствует предельной величине в звёздном каталоге).
+This notebook is intended for generating the distance catalog of the star sensor database. It allows the creation of a table containing angular distances between navigation stars from the star catalog.
+
+The main configurable parameters are: 
+- maximum angular distance between stars in a pair;
+- limiting stellar magnitude of the catalog (corresponding to the limiting magnitude of the star catalog).
 
 ---
