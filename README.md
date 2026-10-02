@@ -57,3 +57,11 @@ The main configurable parameters are:
 - limiting stellar magnitude of the catalog (corresponding to the limiting magnitude of the star catalog).
 
 ---
+
+## Citation
+
+If you use this code in your research, please cite:
+
+
+**Article:** \
+Svetlov, A.E., Zapevalin, P.R. Implementation of the Classical Method for Identifying Stellar Configurations Using Brightness Data. *Astron. Rep*. **70**, 697–705 (2026). DOI: https://doi.org/10.1134/S1063772926700824
